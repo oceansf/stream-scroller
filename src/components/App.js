@@ -67,16 +67,20 @@ const App = () => {
 	const getNextStream = () => {
 		if (activeStreamIndex === streamUrls.length - 1) {
 			setActiveStreamUrl(streamUrls[0]);
+			setActiveStreamer(streamUrls[0]);
 		} else {
 			setActiveStreamUrl(streamUrls[activeStreamIndex + 1]);
+			setActiveStreamer(streamUrls[activeStreamIndex + 1].slice(22));
 		}
 	};
 
 	const getPrevStream = () => {
 		if (activeStreamIndex === 0) {
 			setActiveStreamUrl(streamUrls[streamUrls.length - 1]);
+			setActiveStreamer(streamUrls[streamUrls.length - 1].slice(22));
 		} else {
 			setActiveStreamUrl(streamUrls[activeStreamIndex - 1]);
+			setActiveStreamer(streamUrls[activeStreamIndex - 1].slice(22));
 		}
 	};
 

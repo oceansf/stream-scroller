@@ -4,11 +4,10 @@ import useWindowSize from '../hooks/useWindowSize';
 
 import { Box, Container, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 
 const StreamPlayer = ({ activeStreamUrl }) => {
 	const useStyles = makeStyles({
-		border: {
+		gradientBorder: {
 			padding: '1px 0',
 			background: 'linear-gradient(to right, #ff00cc, #333399)',
 		},
@@ -22,7 +21,7 @@ const StreamPlayer = ({ activeStreamUrl }) => {
 				display="flex"
 				justifyContent="center"
 				textAlign="center"
-				className={classes.border}
+				className={classes.gradientBorder}
 			>
 				<ReactPlayer
 					url={activeStreamUrl}

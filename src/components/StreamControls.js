@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import useWindowSize from '../hooks/useWindowSize';
 
-import { Box, Button, ButtonGroup } from '@material-ui/core';
+import { Box, Button, ButtonGroup, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -19,15 +20,23 @@ const StreamControls = ({
 }) => {
 	const classes = useStyles();
 	const [started, setStarted] = useState(false);
+	const size = useWindowSize();
 
 	return (
 		<Box
 			display="flex"
-			justifyContent="center"
+			justifyContent="space-around"
 			pt={2}
 			pb={2}
 			className={classes.root}
 		>
+			{size.width < 500 ? null : (
+				<Typography
+					color="primary"
+					variant="h6"
+				>{`${activeStreamer}`}</Typography>
+			)}
+
 			<ButtonGroup size="large" color="primary" variant="text">
 				<Button
 					disabled={!started ? true : false}
@@ -52,20 +61,22 @@ const StreamControls = ({
 					<ArrowForwardIcon />
 				</Button>
 			</ButtonGroup>
-			<Button
-				variant="contained"
-				color="secondary"
-				target="popup"
-				onClick={() =>
-					window.open(
-						`https://www.twitch.tv/popout/${activeStreamer}/chat?popout=`,
-						'name',
-						'width=400,height=599'
-					)
-				}
-			>
-				Chat
-			</Button>
+			{size.width < 500 ? null : (
+				<Button
+					variant="contained"
+					color="secondary"
+					target="popup"
+					onClick={() =>
+						window.open(
+							`https://www.twitch.tv/popout/${activeStreamer}/chat?popout=`,
+							'name',
+							'width=400,height=599'
+						)
+					}
+				>
+					Chat
+				</Button>
+			)}
 		</Box>
 	);
 };

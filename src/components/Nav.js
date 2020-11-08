@@ -47,7 +47,7 @@ export default function ButtonAppBar() {
 							<MenuIcon />
 						</IconButton>
 						<Typography variant="h5" className={classes.title}>
-							stream-scroller
+							stream surfer
 						</Typography>
 						<IconButton
 							color="inherit"
