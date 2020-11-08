@@ -39,7 +39,6 @@ const App = () => {
 	const [activeStreamer, setActiveStreamer] = useState('');
 	const activeStreamIndex = streamUrls.indexOf(activeStreamUrl);
 	let streamsArr, usernamesArr;
-	const date = new Date();
 
 	useEffect(() => {
 		const start = async () => {
