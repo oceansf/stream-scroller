@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -8,9 +8,14 @@ import {
 	Typography,
 	IconButton,
 	Container,
+	SwipeableDrawer,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import GitHubIcon from '@material-ui/icons/GitHub';
+import YouTubeIcon from '@material-ui/icons/YouTube';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -26,23 +31,98 @@ const useStyles = makeStyles((theme) => ({
 	appBar: {
 		background: 'black',
 		color: 'white',
-		// borderBottom: '1px solid #651fff',
+	},
+	list: {
+		background: 'black',
+		color: 'white',
+		width: 250,
+		height: '100%',
+		padding: 0,
+	},
+	drawerHeader: {
+		background: 'black',
+	},
+	border: {
+		padding: '1px 0',
+		background: 'linear-gradient(to right, #ff00cc, #333399)',
+	},
+	twitchBtn: {
+		padding: '1rem',
+		'&:hover': {
+			background: '#6441A4',
+		},
+	},
+	ytBtn: {
+		padding: '1rem',
+		'&:hover': {
+			background: '#FF0000',
+		},
+	},
+	twitchIcon: {
+		marginRight: '1rem',
+	},
+	ytIcon: {
+		marginRight: '1rem',
 	},
 }));
 
 export default function ButtonAppBar() {
 	const classes = useStyles();
+	const [drawerIsOpen, setDrawerIsOpen] = useState(false);
+
+	const Drawer = () => {
+		return (
+			<SwipeableDrawer
+				open={drawerIsOpen}
+				onClose={() => setDrawerIsOpen(false)}
+				onOpen={() => setDrawerIsOpen(true)}
+			>
+				<Box className={classes.border}>
+					<Box
+						variant="contained"
+						textAlign="center"
+						disableElevation
+						disableFocusRipple
+						p={1}
+						className={classes.drawerHeader}
+					>
+						<Typography variant="h5" color="primary" className={classes.title}>
+							stream surfer
+						</Typography>
+					</Box>
+				</Box>
+				<List
+					component="nav"
+					aria-label="main mailbox folders"
+					className={classes.list}
+				>
+					<ListItem button className={classes.twitchBtn}>
+						<div className={classes.twitchIcon}>
+							<i className="fab fa-twitch fa-2x" />
+						</div>
+						<ListItemText primary="Twitch" />
+					</ListItem>
+					<ListItem button className={classes.ytBtn}>
+						<YouTubeIcon fontSize="large" className={classes.ytIcon} />
+						<ListItemText primary="YouTube" />
+					</ListItem>
+				</List>
+			</SwipeableDrawer>
+		);
+	};
 
 	return (
 		<Box textAlign="center">
+			<Drawer />
 			<AppBar position="static" className={classes.appBar}>
 				<Container maxWidth="lg">
 					<Toolbar>
 						<IconButton
 							edge="start"
-							className={classes.menuButton}
 							color="inherit"
 							aria-label="menu"
+							onClick={() => setDrawerIsOpen(!drawerIsOpen)}
+							className={classes.menuButton}
 						>
 							<MenuIcon />
 						</IconButton>
