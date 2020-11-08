@@ -17,17 +17,17 @@ const StreamPlayer = ({ activeStreamUrl }) => {
   const classes = useStyles();
   const size = useWindowSize();
 
+  console.log(size.width);
+
   return (
     <Box display="flex" justifyContent="center">
-      <div className={classes.border}>
-        <ReactPlayer
-          url={activeStreamUrl}
-          playing
-          pip
-          width={size.width}
-          height={size.height * 0.75}
-        />
-      </div>
+      <ReactPlayer
+        url={activeStreamUrl}
+        playing
+        pip
+        width={size.width < 1280 ? size.width : 1280}
+        height={size.height * 0.8}
+      />
     </Box>
   );
 };

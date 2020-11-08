@@ -4,7 +4,7 @@ import Auth from './pages/Auth';
 import Home from './pages/Home';
 import Nav from './Nav';
 
-import { Box, Container, CssBaseline, Typography } from '@material-ui/core';
+import { Box, Container, CssBaseline } from '@material-ui/core';
 import {
   createMuiTheme,
   makeStyles,
@@ -14,10 +14,10 @@ import {
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#6034b2',
+      main: '#651fff',
     },
     secondary: {
-      main: '#000000',
+      main: '#6200ea',
     },
   },
 });

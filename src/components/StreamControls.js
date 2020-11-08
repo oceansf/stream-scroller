@@ -8,6 +8,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 const useStyles = makeStyles({
   root: {
     backgroundColor: 'black',
+    // borderTop: '1px solid #651fff',
   },
 });
 
@@ -35,7 +36,6 @@ const StreamControls = ({ getRandomStream, getNextStream, getPrevStream }) => {
         <Button
           variant="contained"
           color="primary"
-          size="large"
           onClick={() => {
             setStarted(true);
             getRandomStream();
