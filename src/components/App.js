@@ -14,7 +14,7 @@ import {
 const theme = createMuiTheme({
 	palette: {
 		primary: {
-			main: '#fff',
+			main: '#ffffff',
 		},
 		secondary: {
 			main: '#6200ea',
@@ -36,6 +36,7 @@ const App = () => {
 	const isAuthorized = document.location.hash;
 	const [streamUrls, setStreamUrls] = useState([]);
 	const [activeStreamUrl, setActiveStreamUrl] = useState('');
+	const [activeStreamer, setActiveStreamer] = useState('');
 	const activeStreamIndex = streamUrls.indexOf(activeStreamUrl);
 	let streamsArr, usernamesArr;
 
@@ -58,9 +59,9 @@ const App = () => {
 	};
 
 	const getRandomStream = () => {
-		setActiveStreamUrl(
-			streamUrls[Math.floor(Math.random() * streamUrls.length)]
-		);
+		const randomIndex = Math.floor(Math.random() * streamUrls.length);
+		setActiveStreamUrl(streamUrls[randomIndex]);
+		setActiveStreamer(streamUrls[randomIndex].slice(22));
 	};
 
 	const getNextStream = () => {
@@ -73,7 +74,7 @@ const App = () => {
 
 	const getPrevStream = () => {
 		if (activeStreamIndex === 0) {
-			setActiveStreamUrl(streamUrls[streamUrls.length]);
+			setActiveStreamUrl(streamUrls[streamUrls.length - 1]);
 		} else {
 			setActiveStreamUrl(streamUrls[activeStreamIndex - 1]);
 		}
@@ -85,9 +86,10 @@ const App = () => {
 				<CssBaseline />
 				<Container maxWidth="xl" disableGutters className={classes.root}>
 					<Nav />
-					{document.location.hash ? (
+					{isAuthorized ? (
 						<Home
 							activeStreamUrl={activeStreamUrl}
+							activeStreamer={activeStreamer}
 							getRandomStream={getRandomStream}
 							getNextStream={getNextStream}
 							getPrevStream={getPrevStream}

@@ -4,6 +4,7 @@ import StreamControls from '../StreamControls';
 
 const Home = ({
 	activeStreamUrl,
+	activeStreamer,
 	getRandomStream,
 	getNextStream,
 	getPrevStream,
@@ -12,6 +13,8 @@ const Home = ({
 		<React.Fragment>
 			<StreamPlayer activeStreamUrl={activeStreamUrl} />
 			<StreamControls
+				activeStreamUrl={activeStreamUrl}
+				activeStreamer={activeStreamer}
 				getRandomStream={getRandomStream}
 				getNextStream={getNextStream}
 				getPrevStream={getPrevStream}

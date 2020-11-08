@@ -1,15 +1,16 @@
 import React from 'react';
+
 import { makeStyles } from '@material-ui/core/styles';
 import {
 	AppBar,
 	Box,
 	Toolbar,
 	Typography,
-	Button,
 	IconButton,
 	Container,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+import GitHubIcon from '@material-ui/icons/GitHub';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -36,7 +37,7 @@ export default function ButtonAppBar() {
 		<Box textAlign="center">
 			<AppBar position="static" className={classes.appBar}>
 				<Container maxWidth="lg">
-					<Toolbar disableGutters>
+					<Toolbar>
 						<IconButton
 							edge="start"
 							className={classes.menuButton}
@@ -48,7 +49,13 @@ export default function ButtonAppBar() {
 						<Typography variant="h5" className={classes.title}>
 							stream-scroller
 						</Typography>
-						<Button color="inherit">Login</Button>
+						<IconButton
+							color="inherit"
+							href="https://github.com/oceansf/stream-scroller"
+							target="_blank"
+						>
+							<GitHubIcon />
+						</IconButton>
 					</Toolbar>
 				</Container>
 			</AppBar>

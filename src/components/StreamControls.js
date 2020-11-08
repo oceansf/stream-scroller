@@ -8,13 +8,18 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 const useStyles = makeStyles({
 	root: {
 		backgroundColor: 'black',
-		// borderTop: '1px solid #651fff',
 	},
 });
 
-const StreamControls = ({ getRandomStream, getNextStream, getPrevStream }) => {
+const StreamControls = ({
+	activeStreamer,
+	getRandomStream,
+	getNextStream,
+	getPrevStream,
+}) => {
 	const classes = useStyles();
 	const [started, setStarted] = useState(false);
+
 	return (
 		<Box
 			display="flex"
@@ -23,10 +28,8 @@ const StreamControls = ({ getRandomStream, getNextStream, getPrevStream }) => {
 			pb={2}
 			className={classes.root}
 		>
-			<ButtonGroup>
+			<ButtonGroup size="large" color="primary" variant="text">
 				<Button
-					variant="outlined"
-					color="primary"
 					disabled={!started ? true : false}
 					onClick={() => getPrevStream()}
 				>
@@ -34,8 +37,6 @@ const StreamControls = ({ getRandomStream, getNextStream, getPrevStream }) => {
 					Prev
 				</Button>
 				<Button
-					variant="outlined"
-					color="primary"
 					onClick={() => {
 						setStarted(true);
 						getRandomStream();
@@ -44,8 +45,6 @@ const StreamControls = ({ getRandomStream, getNextStream, getPrevStream }) => {
 					{started ? 'Random' : 'Start'}
 				</Button>
 				<Button
-					variant="outlined"
-					color="primary"
 					disabled={!started ? true : false}
 					onClick={() => getNextStream()}
 				>
@@ -53,6 +52,20 @@ const StreamControls = ({ getRandomStream, getNextStream, getPrevStream }) => {
 					<ArrowForwardIcon />
 				</Button>
 			</ButtonGroup>
+			<Button
+				variant="contained"
+				color="secondary"
+				target="popup"
+				onClick={() =>
+					window.open(
+						`https://www.twitch.tv/popout/${activeStreamer}/chat?popout=`,
+						'name',
+						'width=400,height=599'
+					)
+				}
+			>
+				Chat
+			</Button>
 		</Box>
 	);
 };
