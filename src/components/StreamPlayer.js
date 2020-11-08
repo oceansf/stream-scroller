@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactPlayer from 'react-player';
 import useWindowSize from '../hooks/useWindowSize';
 
@@ -11,28 +11,50 @@ const StreamPlayer = ({ activeStreamUrl }) => {
 			padding: '1px 0',
 			background: 'linear-gradient(to right, #ff00cc, #333399)',
 		},
+		playerWrapper: {
+			position: 'relative',
+			backgroundColor: 'black',
+		},
+		preStartHeader: {
+			position: 'absolute',
+			top: '40%',
+		},
 	});
 	const classes = useStyles();
 	const size = useWindowSize();
+	const [playing, setPlaying] = useState(false);
 
 	return (
 		<Container disableGutters>
-			<Box
-				display="flex"
-				justifyContent="center"
-				textAlign="center"
-				className={classes.gradientBorder}
-			>
-				<ReactPlayer
-					url={activeStreamUrl}
-					playing
-					pip
-					width={size.width < 1280 ? size.width : 1280}
-					height={size.height < 720 ? size.height : 720}
-					onError={() => document.location.reload()}
-					wrapper="div"
-				/>
-			</Box>
+			<div className={classes.gradientBorder}>
+				<Box
+					display="flex"
+					justifyContent="center"
+					textAlign="center"
+					className={classes.playerWrapper}
+				>
+					{playing ? null : (
+						<Typography
+							variant="h2"
+							color="primary"
+							className={classes.preStartHeader}
+						>
+							Click START to begin
+						</Typography>
+					)}
+
+					<ReactPlayer
+						url={activeStreamUrl}
+						playing
+						onStart={() => setPlaying(true)}
+						pip
+						width={size.width < 1280 ? size.width : 1280}
+						height={size.height < 720 ? size.height : 720}
+						onError={() => document.location.reload()}
+						wrapper="div"
+					/>
+				</Box>
+			</div>
 		</Container>
 	);
 };
