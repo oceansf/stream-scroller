@@ -1,26 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import StreamPlayer from '../StreamPlayer';
 import StreamControls from '../StreamControls';
 
 const Home = ({
-	activeStreamUrl,
-	activeStreamer,
-	getRandomStream,
-	getNextStream,
-	getPrevStream,
+  activeStreamUrl,
+  activeStreamer,
+  getRandomStream,
+  getNextStream,
+  getPrevStream,
 }) => {
-	return (
-		<React.Fragment>
-			<StreamPlayer activeStreamUrl={activeStreamUrl} />
-			<StreamControls
-				activeStreamUrl={activeStreamUrl}
-				activeStreamer={activeStreamer}
-				getRandomStream={getRandomStream}
-				getNextStream={getNextStream}
-				getPrevStream={getPrevStream}
-			/>
-		</React.Fragment>
-	);
+  const [started, setStarted] = useState(false);
+  return (
+    <React.Fragment>
+      <StreamPlayer activeStreamUrl={activeStreamUrl} started={started} />
+      <StreamControls
+        activeStreamUrl={activeStreamUrl}
+        activeStreamer={activeStreamer}
+        getRandomStream={getRandomStream}
+        getNextStream={getNextStream}
+        getPrevStream={getPrevStream}
+        started={started}
+        setStarted={setStarted}
+      />
+    </React.Fragment>
+  );
 };
 
 export default Home;

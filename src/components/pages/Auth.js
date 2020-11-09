@@ -1,10 +1,8 @@
 import React from 'react';
-
+import { authURL } from '../../API/twitchAPI';
 import { Box, Button, Container, Typography } from '@material-ui/core';
 
 const Login = () => {
-  const authURL = `https://id.twitch.tv/oauth2/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&redirect_uri=https://practical-villani-7ae8dc.netlify.app&response_type=token`;
-
   return (
     <Container maxWidth="xl" disableGutters>
       <Box color="white" textAlign="center" p={5}>
