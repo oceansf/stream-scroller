@@ -35,11 +35,11 @@ const StreamPlayer = ({ activeStreamUrl }) => {
 				>
 					{playing ? null : (
 						<Typography
-							variant="h2"
+							variant="h3"
 							color="primary"
 							className={classes.preStartHeader}
 						>
-							Click START to begin
+							Click the START button below to begin
 						</Typography>
 					)}
 

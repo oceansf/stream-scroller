@@ -58,10 +58,7 @@ const useStyles = makeStyles((theme) => ({
 			background: '#FF0000',
 		},
 	},
-	twitchIcon: {
-		marginRight: '1rem',
-	},
-	ytIcon: {
+	icon: {
 		marginRight: '1rem',
 	},
 }));
@@ -97,13 +94,13 @@ export default function ButtonAppBar() {
 					className={classes.list}
 				>
 					<ListItem button className={classes.twitchBtn}>
-						<div className={classes.twitchIcon}>
+						<div className={classes.icon}>
 							<i className="fab fa-twitch fa-2x" />
 						</div>
 						<ListItemText primary="Twitch" />
 					</ListItem>
 					<ListItem button className={classes.ytBtn}>
-						<YouTubeIcon fontSize="large" className={classes.ytIcon} />
+						<YouTubeIcon fontSize="large" className={classes.icon} />
 						<ListItemText primary="YouTube" />
 					</ListItem>
 				</List>
