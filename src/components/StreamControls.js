@@ -109,7 +109,7 @@ const StreamControls = ({
 					frameBorder="0"
 					scrolling="no"
 					id="chat_embed"
-					src={`https://www.twitch.tv/embed/${activeStreamer}/chat?parent=localhost&darkpopout`}
+					src={`https://www.twitch.tv/embed/${activeStreamer}/chat?parent=${process.env.REACT_APP_CLIENT_CHAT_URI}&darkpopout`}
 					height="500"
 					width="100%"
 					title={`${activeStreamer}`}
