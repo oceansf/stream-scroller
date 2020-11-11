@@ -16,6 +16,9 @@ const useStyles = makeStyles({
 		borderRadius: 0,
 		padding: '1rem',
 	},
+	chatWrapper: {
+		background: '#18181b',
+	},
 });
 
 const StreamControls = ({
@@ -105,15 +108,21 @@ const StreamControls = ({
 				</Button>
 			) : null}
 			{started && chatOpen ? (
-				<iframe
-					frameBorder="0"
-					scrolling="no"
-					id="chat_embed"
-					src={`https://www.twitch.tv/embed/${activeStreamer}/chat?parent=${process.env.REACT_APP_CLIENT_CHAT_URI}&darkpopout`}
-					height="500"
-					width="100%"
-					title={`${activeStreamer}`}
-				/>
+				<Box
+					pl={size.width > 1000 ? 20 : 0}
+					pr={size.width > 1000 ? 20 : 0}
+					className={classes.chatWrapper}
+				>
+					<iframe
+						frameBorder="0"
+						scrolling="no"
+						id="chat_embed"
+						src={`https://www.twitch.tv/embed/${activeStreamer}/chat?parent=${process.env.REACT_APP_CLIENT_CHAT_URI}&darkpopout`}
+						height="500"
+						width="100%"
+						title={`${activeStreamer}`}
+					/>
+				</Box>
 			) : null}
 		</React.Fragment>
 	);
