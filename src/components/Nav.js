@@ -9,6 +9,7 @@ import {
 	IconButton,
 	Container,
 	SwipeableDrawer,
+	Divider,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import GitHubIcon from '@material-ui/icons/GitHub';
@@ -55,15 +56,21 @@ const useStyles = makeStyles((theme) => ({
 	ytBtn: {
 		padding: '1rem',
 		'&:hover': {
-			background: '#FF0000',
+			background: '#523c7c',
 		},
 	},
 	icon: {
 		marginRight: '1rem',
 	},
+	secondaryBtn: {
+		padding: '1rem',
+		'&:hover': {
+			background: '#402a6a',
+		},
+	},
 }));
 
-export default function ButtonAppBar() {
+export default function ButtonAppBar({ setMainPage }) {
 	const classes = useStyles();
 	const [drawerIsOpen, setDrawerIsOpen] = useState(false);
 
@@ -78,8 +85,6 @@ export default function ButtonAppBar() {
 					<Box
 						variant="contained"
 						textAlign="center"
-						disableElevation
-						disableFocusRipple
 						p={1}
 						className={classes.drawerHeader}
 					>
@@ -93,13 +98,32 @@ export default function ButtonAppBar() {
 					aria-label="main mailbox folders"
 					className={classes.list}
 				>
-					<ListItem button className={classes.twitchBtn}>
+					<ListItem
+						button
+						onClick={() => {
+							setMainPage('player');
+							setDrawerIsOpen(false);
+						}}
+						className={classes.twitchBtn}
+					>
 						<div className={classes.icon}>
 							<i className="fab fa-twitch fa-2x" />
 						</div>
 						<ListItemText primary="Twitch" />
 					</ListItem>
-					<ListItem button className={classes.ytBtn}>
+
+					<ListItem
+						button
+						onClick={() => {
+							setDrawerIsOpen(false);
+							setMainPage('games');
+						}}
+						className={classes.secondaryBtn}
+					>
+						<ListItemText primary="Games" />
+					</ListItem>
+					<Divider />
+					<ListItem button disabled className={classes.ytBtn}>
 						<YouTubeIcon fontSize="large" className={classes.icon} />
 						<ListItemText primary="YouTube" />
 					</ListItem>

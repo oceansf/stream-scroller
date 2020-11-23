@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { fetchStreams } from '../API/twitchAPI';
-import Auth from './pages/Auth';
 import Home from './pages/Home';
-import Nav from './Nav';
 
 import { Box, Container, CssBaseline } from '@material-ui/core';
 import {
@@ -24,10 +23,10 @@ const theme = createMuiTheme({
 
 const useStyles = makeStyles({
 	root: {
-		height: '100vh',
+		height: `${window.innerHeight}`,
 	},
 	bg: {
-		height: '100vh',
+		minHeight: '100%',
 		background: '#000000',
 	},
 });
@@ -35,11 +34,12 @@ const useStyles = makeStyles({
 const App = () => {
 	const classes = useStyles();
 	const isAuthorized = document.location.hash;
+	const [streams, setStreams] = useState([]);
+	// Everything comes from here....
 	const [streamUrls, setStreamUrls] = useState([]);
 	const [activeStreamUrl, setActiveStreamUrl] = useState('');
 	const [activeStreamer, setActiveStreamer] = useState('');
 	const activeStreamIndex = streamUrls.indexOf(activeStreamUrl);
-	let streamsArr, usernamesArr;
 
 	useEffect(() => {
 		const start = async () => {
@@ -50,15 +50,20 @@ const App = () => {
 	}, []);
 
 	const getStreamUrls = async () => {
+		let streamsArr, usernamesArr;
 		if (isAuthorized.length > 0) {
 			streamsArr = await fetchStreams();
+			setStreams(streamsArr);
 			usernamesArr = streamsArr.map((stream) => stream.user_name);
-			setStreamUrls(
-				usernamesArr.map((username) => `https://www.twitch.tv/${username}`)
-			);
+			formatToURL(usernamesArr);
 		}
 	};
 
+	const formatToURL = (array) => {
+		setStreamUrls(array.map((username) => `https://www.twitch.tv/${username}`));
+	};
+
+	// Player controls -------------------------------------------------------
 	const getRandomStream = () => {
 		const randomIndex = Math.floor(Math.random() * streamUrls.length);
 		setActiveStreamUrl(streamUrls[randomIndex]);
@@ -90,18 +95,24 @@ const App = () => {
 			<Box className={classes.bg}>
 				<CssBaseline />
 				<Container maxWidth="xl" disableGutters className={classes.root}>
-					<Nav />
-					{isAuthorized ? (
-						<Home
-							activeStreamUrl={activeStreamUrl}
-							activeStreamer={activeStreamer}
-							getRandomStream={getRandomStream}
-							getNextStream={getNextStream}
-							getPrevStream={getPrevStream}
-						/>
-					) : (
-						<Auth />
-					)}
+					<Router>
+						<Switch>
+							<Route
+								exact
+								path="/"
+								render={() => (
+									<Home
+										isAuthorized={isAuthorized}
+										activeStreamUrl={activeStreamUrl}
+										activeStreamer={activeStreamer}
+										getRandomStream={getRandomStream}
+										getNextStream={getNextStream}
+										getPrevStream={getPrevStream}
+									/>
+								)}
+							/>
+						</Switch>
+					</Router>
 				</Container>
 			</Box>
 		</ThemeProvider>
