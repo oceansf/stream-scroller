@@ -25,8 +25,7 @@ export const fetchGames = async () => {
 		'https://api.twitch.tv/helix/games/top?first=20',
 		{
 			headers: {
-				// Authorization: `Bearer ${authToken}`,
-				Authorization: `Bearer yw5nj4fyaaz8is3pv58xgddzv3q3b4`,
+				Authorization: `Bearer ${authToken}`,
 				'Client-Id': `${process.env.REACT_APP_CLIENT_ID}`,
 			},
 		}
