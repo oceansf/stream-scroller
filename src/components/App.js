@@ -34,7 +34,6 @@ const useStyles = makeStyles({
 const App = () => {
 	const classes = useStyles();
 	const isAuthorized = document.location.hash;
-	const [streams, setStreams] = useState([]);
 	// Everything comes from here....
 	const [streamUrls, setStreamUrls] = useState([]);
 	const [activeStreamUrl, setActiveStreamUrl] = useState('');
@@ -53,7 +52,6 @@ const App = () => {
 		let streamsArr, usernamesArr;
 		if (isAuthorized.length > 0) {
 			streamsArr = await fetchStreams();
-			setStreams(streamsArr);
 			usernamesArr = streamsArr.map((stream) => stream.user_name);
 			formatToURL(usernamesArr);
 		}
